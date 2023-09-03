@@ -8,12 +8,18 @@ class GetSellerByIdAction
 {
     public function __invoke($seller_id)
     {
-        $response = ApiSellersAndSalesFacade::get("api/seller/$seller_id");
+        try {
+            $response = ApiSellersAndSalesFacade::get("api/seller/$seller_id");
 
-        if ($response->failed()) {
+            return $response->json();
+
+        } catch (\Exception $e) {
+            logger()->error('GetSellerByIdAction - error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ]);
+
             return;
         }
-
-        return $response->json();
     }
 }

@@ -36,21 +36,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($sellers as $seller)
-                        <tr class="border-b grid grid-flow-col gap-x-2">
-                            <td class="px-4 py-2 text-left align-top w-1/2">
-                                <div>
-                                    <h2>{{$seller['name']}}</h2>
-                                    <p class="text-xs">{{$seller['email']}}</p>
-                                </div>
-                            </td>
-                            <td class="px-4 py-2 text-right text-cyan-500">
-                                <a href="{{route('seller-sales', $seller['id'])}}">
-                                    <p class="text-xs"><span>add sale | more...</span></p>
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
+                    @if ($sellers)
+                        @foreach ($sellers as $seller)
+                            <tr class="border-b grid grid-flow-col gap-x-2">
+                                <td class="px-4 py-2 text-left align-top w-1/2">
+                                    <div>
+                                        <h2>{{$seller['name']}}</h2>
+                                        <p class="text-xs">{{$seller['email']}}</p>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-2 text-right text-cyan-500">
+                                    <a href="{{route('seller-sales', $seller['id'])}}">
+                                        <p class="text-xs"><span>add sale | more...</span></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

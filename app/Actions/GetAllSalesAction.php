@@ -8,12 +8,18 @@ class GetAllSalesAction
 {
     public function __invoke()
     {
-        $response = ApiSellersAndSalesFacade::get('api/sales');
+        try {
+            $response = ApiSellersAndSalesFacade::get('api/sales');
 
-        if ($response->failed()) {
+            return $response->json();
+
+        } catch (\Exception $e) {
+            logger()->error('GetAllSalesAction - error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ]);
+
             return;
         }
-
-        return $response->json();
     }
 }

@@ -56,19 +56,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($sales as $sale)
-                        <tr class="border-b w-full">
-                            <td class="px-4 py-2 text-left align-top w-1/2">
-                                <div>
-                                    <h2>Value: $ {{ $sale['value_formatted'] }}</h2>
-                                    <p>date: {{ $sale['sale_date'] }}</p>
-                                </div>
-                            </td>
-                            <td class="px-4 py-2 text-right text-cyan-500 w-1/2">
-                                <p><span>Commission: $ {{$sale['commission_formatted']}}</span></p>
-                            </td>
-                        </tr>
-                    @endforeach
+                    @if ($sales)
+                        @foreach ($sales as $sale)
+                            <tr class="border-b w-full">
+                                <td class="px-4 py-2 text-left align-top w-1/2">
+                                    <div>
+                                        <h2>Value: $ {{ $sale['value_formatted'] }}</h2>
+                                        <p>date: {{ $sale['sale_date'] }}</p>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-2 text-right text-cyan-500 w-1/2">
+                                    <p><span>Commission: $ {{$sale['commission_formatted']}}</span></p>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

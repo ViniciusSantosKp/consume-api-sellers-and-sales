@@ -13,12 +13,18 @@ class SaveSellerAction
             'email' => $email,
         ];
 
-        $response = ApiSellersAndSalesFacade::post('api/sellers', $dataToSave);
+        try {
+            $response = ApiSellersAndSalesFacade::post('api/sellers', $dataToSave);
 
-        if ($response->failed()) {
+            return $response->json();
+
+        } catch (\Exception $e) {
+            logger()->error('SaveSellerAction - error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ]);
+
             return;
         }
-
-        return $response->json();
     }
 }
